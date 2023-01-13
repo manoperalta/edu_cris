@@ -1,0 +1,12 @@
+gravando bd
+INSERT INTO `usuarios` (`id`, `email`, `senha`) VALUES (NULL, 'test@test', '123');
+
+Alteração um campo no banco de dados
+UPDATE `usuarios` SET `agenda` = 'campo_alterado' WHERE `usuarios`.`id` = 7;
+UPDATE `usuarios` SET `nome` = 'joão', `email` = 'joao@joaov', `agenda` = 'terça-feira: 11h<br>sexta-feira: 9h<br>quinta-feira: 15h<br>segunda-feira: 17h', `senha` = '0123' WHERE `usuarios`.`id` = 7;
+
+id
+nome
+email
+tipo
+senha
