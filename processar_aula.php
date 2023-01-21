@@ -29,14 +29,25 @@ $reg_aula = filter_input(INPUT_POST, 'reg_aula', FILTER_SANITIZE_STRING);
 $esp = "<br>";
 $esp_especial = "<p>";
 $aula_reg = $aula_old . $esp_especial . $dia_plus . $esp . $reg_aula . $esp_especial;
+$financeiro_new = filter_input(INPUT_POST, 'financeiro_new', FILTER_SANITIZE_STRING);
+
+
+# financeiro
+
+$financeiro_old = filter_input(INPUT_POST, 'financeiro_old', FILTER_SANITIZE_STRING);
+$financeiro_reg = $esp . $financeiro_old . $financeiro_new;
 
 echo "Nome: $nome <br>";
 echo "E-mail: $email <br>";
 echo "Aula Anterior: $aula_old <br>";
 echo "Registro atual: $aula_reg <br>";
+echo "Financeiro: $financeiro_reg <br>";
 
 
 $result_bd = "UPDATE usuarios SET aulas = '$aula_reg' WHERE usuarios . id = '$id_post'";
+$resultado_usuario = mysqli_query($mysqli, $result_bd);
+
+$result_bd = "UPDATE usuarios SET financeiro = '$financeiro_reg' WHERE usuarios . id = '$id_post'";
 $resultado_usuario = mysqli_query($mysqli, $result_bd);
 
 
@@ -44,6 +55,6 @@ if(mysqli_insert_id($mysqli)) {
    header("Location: index.php");
 
 }else{
-    header("Location: aula.php");
+    header("Location: aula.php?busca=$nome");
    
 };

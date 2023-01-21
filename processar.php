@@ -22,7 +22,7 @@ $esp = "<br>";
 $agenda = $agenda1x . $horario1x . $esp . $agenda2x . $horario2x . $esp . $agenda3x . $horario3x . $esp . $agenda4x . $horario4x;
 $matricula = $dia_completo;
 $registro_inicial = "[Data da Matrícula: ". $matricula . "]";
-
+$financeiro = "";
 echo "Nome: $nome <br>";
 echo "Fone: $fone <br>";
 echo "Responsavel: $responsavel <br>";
@@ -35,7 +35,7 @@ echo "Agenda: $agenda<br>";
 echo "Matricula $registro_inicial";
 
 
-$result_bd = "INSERT INTO usuarios (nome, fone, responsavel, endereco, email, data_nasc, tipo, agenda, senha, aulas, matricula)  VALUES('$nome', '$fone', '$responsavel', '$endereco', '$email', '$data_nasc', '$tipo', '$agenda', '$senha', '$registro_inicial', '$matricula')";
+$result_bd = "INSERT INTO usuarios (nome, fone, responsavel, endereco, email, data_nasc, tipo, agenda, senha, aulas, matricula, financeiro)  VALUES('$nome', '$fone', '$responsavel', '$endereco', '$email', '$data_nasc', '$tipo', '$agenda', '$senha', '$registro_inicial', '$matricula', '$financeiro')";
 $resultado_usuario = mysqli_query($mysqli, $result_bd);
 
 if(mysqli_insert_id($mysqli)) {

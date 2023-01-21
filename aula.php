@@ -17,39 +17,8 @@ include('conexao.php');
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
 
+<?php include('nav.php'); ?>
 
-  <div class="collapse" id="navbarToggleExternalContent">
-  <div class="bg-dark p-4">Financeiro
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-    Geral
-  </button>
-  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-  <li><a class="dropdown-item" href="painel.php">Painel</a></li>    
-  <li><a class="dropdown-item" href="#">Professores</a></li>
-    <li><a class="dropdown-item" href="#">Financeiro</a></li>
-    <li><a class="dropdown-item" href="logout.php">SAIR</a></li>
-  </ul>
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-    Alunos
-  </button>
-  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-  <li><a class="dropdown-item" href="cadastrar.php">Cadastrar</a></li>  
-  <li><a class="dropdown-item" href="agenda.php">Agendar</a></li>
-    <li><a class="dropdown-item" href="editar.php">Editar</a></li>
-    <li><a class="dropdown-item" href="busca.php">Buscar</a></li>
-  </ul>
-</div>
-  </div>
-</div>
-<nav class="navbar navbar-dark bg-dark">
-  <div class="container-fluid">
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <h7 class="text-center m-auto" style="color: aquamarine;">Bem vindo ao Painel, <?php echo $_SESSION['nome'];?>
-</h7>
-  </div>
-</nav>
   </header>
 <body>
 
@@ -81,7 +50,7 @@ $sql_query = $mysqli->query($sql_code) or die("Error ao consultar" . $mysqli->er
     <input name="busca" placeholder="Digite o Dado" type="text">
     <button class="btn btn-primary" type="submit" role="button">Pesquisar</button>
 </form></div></div> 
-<div class="container-fluid">
+<div class="container">
 <table class="table" border="1">
 <table class="table">
   <thead>
@@ -91,6 +60,7 @@ $sql_query = $mysqli->query($sql_code) or die("Error ao consultar" . $mysqli->er
       <th scope="col">Contato</th>
       <th scope="col">Agenda</th>
       <th scope="col">Aulas</th>
+      <th scope="col">Financeiro</th>
     </tr>
   </thead>
   <tbody>
@@ -110,7 +80,8 @@ FROM usuarios
 WHERE nome LIKE '%$pesquisa%' 
 OR tipo LIKE '%$pesquisa%' 
 OR agenda LIKE '%$pesquisa%'
-OR aulas LIKE '%$pesquisa%'";
+OR aulas LIKE '%$pesquisa%' 
+OR financeiro LIKE '%$pesquisa%'";
 
 $sql_query = $mysqli->query($sql_code) or die("Error ao consultar" . $mysqli->error);
 
@@ -130,6 +101,7 @@ while($dados = $sql_query->fetch_assoc()){
     <td><?php echo $dados['email']; ?></td>
     <td><?php echo $dados['agenda']; ?></td>
     <td><?php echo $dados['aulas']; ?></td>
+    <td><?php echo $dados['financeiro']; ?></td>
 </div>
     <p class="text-center m-auto" style="color: black;">Nome do Aluno: <?php echo $dados['nome']; ?></p>
           
@@ -170,6 +142,20 @@ while($dados = $sql_query->fetch_assoc()){
   <div class="form-floating">
   <textarea class="form-control" placeholder="Registro diário" id="floatingTextarea" name="reg_aula"></textarea>
   <label for="floatingTextarea">Digite o registro</label>
+  <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
+           <p class="lead fw-normal mb-2 me-3">
+          <label>Financeiro:
+          <input type="hidden" name="financeiro_old" placeholder="" value="<?php echo $dados['financeiro']; ?>">
+          <select name="financeiro_new" id="financeiro_new">
+            <option value="&emsp;Aberto:  <?php echo $dia_completo; ?>">Aberto</option>
+            <option value="&emsp;Pago:   <?php echo $dia_completo; ?>">Pago</option>
+            
+
+          </select>
+</label>
+        </p><br><br></div>
+
+
   <button class="btn btn-primary" type="submit">Registrar</button></form></div>
 </div>
     

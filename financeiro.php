@@ -1,8 +1,28 @@
 <?php
-include('protect.php');
+include ('protect.php');
 include('conexao.php');
-
 ?>
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+  <title>Painel de Acesso</title>
+  <!-- Required meta tags -->
+ <?php include('meta.php'); ?>
+ 
+</head>
+
+<body>
+  <header>
+ <?php include('nav.php'); ?>
+ 
+  </header>
+  <main>
+    <div class="container">
+   
+    <div class="container">
+    <p class="text-center m-auto" style="color: black;">Dashboard ::: Editar</p>
+<label>Para realizar a edição de um dado, faça a busca primeiro!</label><br>
 <?php
 
 
@@ -11,33 +31,12 @@ $sql_code = "SELECT *
 FROM usuarios 
 WHERE nome LIKE '%$pesquisa%' 
 OR email LIKE '%$pesquisa%' 
-OR agenda LIKE '%$pesquisa%'";
+OR agenda LIKE '%$pesquisa%' 
+OR financeiro LIKE '%$pesquisa%'";
 
 $sql_query = $mysqli->query($sql_code) or die("Error ao consultar" . $mysqli->error);
 ?>
 
-<!doctype html>
-<html lang="pt-br">
-
-<head>
-  <title>Painel de Acesso ::: Buscar</title>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-  <!-- Bootstrap CSS v5.2.1 -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-
-</head>
-
-<body>
-  <header>
-  <?php include('nav.php'); ?>
-
-
-  <main>
-    <div class="container bg-opacity-10 bg-dark">
 <form action="">
   <label>Você pode buscar pelo Nome ou pela Agenda!</label><br>
     <input name="busca" placeholder="Digite o Dado" type="text">
@@ -50,9 +49,9 @@ $sql_query = $mysqli->query($sql_code) or die("Error ao consultar" . $mysqli->er
     <tr>
       <th scope="col">#</th>
       <th scope="col">Nome</th>
-      <th scope="col">Contato</th>
       <th scope="col">Agenda</th>
-      <th scope="col">Acesso</th>
+      <th scope="col">Financeiro</th>
+      <th scope="col">Ações</th>
     </tr>
   </thead>
   <tbody>
@@ -70,7 +69,7 @@ $sql_query = $mysqli->query($sql_code) or die("Error ao consultar" . $mysqli->er
 $sql_code = "SELECT * 
 FROM usuarios 
 WHERE nome LIKE '%$pesquisa%' 
-OR tipo LIKE '%$pesquisa%' 
+OR financeiro LIKE '%$pesquisa%' 
 OR agenda LIKE '%$pesquisa%'";
 
 $sql_query = $mysqli->query($sql_code) or die("Error ao consultar" . $mysqli->error);
@@ -89,15 +88,16 @@ while($dados = $sql_query->fetch_assoc()){
   <tr>
     <td><?php echo $dados['id']; ?></td>
     <td><?php echo $nome_link; ?></td>
-    <td><?php echo $dados['email']; ?></td>
     <td><?php echo $dados['agenda']; ?></td>
+    <td><?php echo $dados['financeiro']; ?></td>
     <td>
     <div class="container">
   <div class="row">
   <div class="col-6 col-sm-4">
     <form action="aula.php">
 <input name="busca" placeholder="" type="hidden" value="<?php echo $dados['nome']; ?>">
-        <button class="btn btn-primary" type="submit" role="button">R</button>
+        
+<button class="btn btn-primary" type="submit" role="button">R</button>
 
 </form></div>
 <div class="col-6 col-sm-4">
@@ -123,7 +123,7 @@ while($dados = $sql_query->fetch_assoc()){
   ?>
 </tbody>
 </table>
-</div>
+</div></div>
   </main>
   <footer>
     <!-- place footer here -->
@@ -139,3 +139,5 @@ while($dados = $sql_query->fetch_assoc()){
 </body>
 
 </html>
+
+    
