@@ -29,26 +29,60 @@ $reg_aula = filter_input(INPUT_POST, 'reg_aula', FILTER_SANITIZE_STRING);
 $esp = "<br>";
 $esp_especial = "<p>";
 $aula_reg = $aula_old . $esp_especial . $dia_plus . $esp . $reg_aula . $esp_especial;
-$financeiro_new = filter_input(INPUT_POST, 'financeiro_new', FILTER_SANITIZE_STRING);
-
 
 # financeiro
-
+$financeiro_new = filter_input(INPUT_POST, 'financeiro_new', FILTER_SANITIZE_STRING);
 $financeiro_old = filter_input(INPUT_POST, 'financeiro_old', FILTER_SANITIZE_STRING);
-$financeiro_reg = $esp . $financeiro_old . $financeiro_new;
+$valor_aula = filter_input(INPUT_POST, 'valor_aula', FILTER_SANITIZE_STRING);
+$divida_ativa = filter_input(INPUT_POST, 'divida_ativa', FILTER_SANITIZE_STRING);
+
+$financeiro_pago = filter_input(INPUT_POST, 'financeiro_pago', FILTER_SANITIZE_STRING);
+$divida_paga = filter_input(INPUT_POST, 'divida_paga', FILTER_SANITIZE_STRING);
+
+if($financeiro_new == 1){
+    $financeiro_aberto = $financeiro_old . $dia_plus;
+    $divida_ativa1 = $divida_ativa + $valor_aula;
+    echo "Financeiro_aberto: $financeiro_aberto <br>";
+    echo "Ativa: $divida_ativa1 <br>";
+
+    $result_bd = "UPDATE usuarios SET financeiro_aberto = '$financeiro_aberto' WHERE usuarios . id = '$id_post'";
+    $resultado_usuario = mysqli_query($mysqli, $result_bd);
+
+    $result_bd = "UPDATE usuarios SET divida_ativa = '$divida_ativa1' WHERE usuarios . id = '$id_post'";
+    $resultado_usuario = mysqli_query($mysqli, $result_bd);
+
+
+}if($financeiro_new == 2){
+    $financeiro_pago = $financeiro_pago . $dia_plus;
+    $divida_paga1 = $divida_paga + $valor_aula;
+    echo "Financeiro_aberto: $financeiro_pago <br>";
+    echo "Ativa: $divida_paga1 <br>";
+    $id_post = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_STRING);
+    
+    $result_bd = "UPDATE usuarios SET financeiro_pago = '$financeiro_pago' WHERE usuarios . id = '$id_post'";
+    $resultado_usuario = mysqli_query($mysqli, $result_bd);
+
+    $result_bd = "UPDATE usuarios SET divida_paga = '$divida_paga1' WHERE usuarios . id = '$id_post'";
+    $resultado_usuario = mysqli_query($mysqli, $result_bd);
+
+
+} else {
+    echo "Have a good night!";
+  }
+
+
 
 echo "Nome: $nome <br>";
 echo "E-mail: $email <br>";
 echo "Aula Anterior: $aula_old <br>";
 echo "Registro atual: $aula_reg <br>";
-echo "Financeiro: $financeiro_reg <br>";
+
 
 
 $result_bd = "UPDATE usuarios SET aulas = '$aula_reg' WHERE usuarios . id = '$id_post'";
 $resultado_usuario = mysqli_query($mysqli, $result_bd);
 
-$result_bd = "UPDATE usuarios SET financeiro = '$financeiro_reg' WHERE usuarios . id = '$id_post'";
-$resultado_usuario = mysqli_query($mysqli, $result_bd);
+
 
 
 if(mysqli_insert_id($mysqli)) {
@@ -57,4 +91,4 @@ if(mysqli_insert_id($mysqli)) {
 }else{
     header("Location: aula.php?busca=$nome");
    
-};
+}

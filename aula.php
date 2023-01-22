@@ -60,7 +60,8 @@ $sql_query = $mysqli->query($sql_code) or die("Error ao consultar" . $mysqli->er
       <th scope="col">Contato</th>
       <th scope="col">Agenda</th>
       <th scope="col">Aulas</th>
-      <th scope="col">Financeiro</th>
+    
+      
     </tr>
   </thead>
   <tbody>
@@ -81,7 +82,11 @@ WHERE nome LIKE '%$pesquisa%'
 OR tipo LIKE '%$pesquisa%' 
 OR agenda LIKE '%$pesquisa%'
 OR aulas LIKE '%$pesquisa%' 
-OR financeiro LIKE '%$pesquisa%'";
+OR financeiro_aberto LIKE '%$pesquisa%' 
+OR financeiro_pago LIKE '%$pesquisa%' 
+OR valor_aula LIKE '%$pesquisa%' 
+OR divida_ativa LIKE '%$pesquisa%' 
+OR divida_paga LIKE '%$pesquisa%'";
 
 $sql_query = $mysqli->query($sql_code) or die("Error ao consultar" . $mysqli->error);
 
@@ -101,7 +106,8 @@ while($dados = $sql_query->fetch_assoc()){
     <td><?php echo $dados['email']; ?></td>
     <td><?php echo $dados['agenda']; ?></td>
     <td><?php echo $dados['aulas']; ?></td>
-    <td><?php echo $dados['financeiro']; ?></td>
+        
+    
 </div>
     <p class="text-center m-auto" style="color: black;">Nome do Aluno: <?php echo $dados['nome']; ?></p>
           
@@ -145,17 +151,41 @@ while($dados = $sql_query->fetch_assoc()){
   <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
            <p class="lead fw-normal mb-2 me-3">
           <label>Financeiro:
-          <input type="hidden" name="financeiro_old" placeholder="" value="<?php echo $dados['financeiro']; ?>">
+          <input type="hidden" name="financeiro_pago" placeholder="Financeiro_pago" value="<?php echo $dados['financeiro_pago']; ?>">
+          <input type="hidden" name="divida_paga" placeholder="divida_paga" value="<?php echo $dados['divida_paga']; ?>">
+          <input type="hidden" name="divida_ativa" placeholder="" value="<?php echo $dados['divida_ativa']; ?>">
+          <input type="hidden" name="valor_aula" placeholder="" value="<?php echo $dados['valor_aula']; ?>">
+          <input type="hidden" name="financeiro_old" placeholder="" value="<?php echo $dados['financeiro_aberto']; ?>">
           <select name="financeiro_new" id="financeiro_new">
-            <option value="&emsp;Aberto:  <?php echo $dia_completo; ?>">Aberto</option>
-            <option value="&emsp;Pago:   <?php echo $dia_completo; ?>">Pago</option>
+            <option value="1">Aberto</option>
+            <option value="2">Pago</option>
             
 
           </select>
 </label>
         </p><br><br></div>
+<div class="container">
+  <div class="row">
+<label>Pagamento: 
+<?php
 
+if($dados['divida_ativa'] >= 1){
+              echo "Aberto R$";
+              echo $dados['divida_ativa'];
+              echo ",00";
+              
+              ?><a class="btn btn-primary" href="financeiro.php?busca=<?php echo $dados['nome'];?>" role="button">Financeiro</a>
+             
+              <?php
+}if($dados['divida_ativa'] == 0){
+              echo "OK";
+}else{
+  
+}
 
+?></label>
+</div>
+</div>
   <button class="btn btn-primary" type="submit">Registrar</button></form></div>
 </div>
     

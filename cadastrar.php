@@ -87,7 +87,16 @@ include('conexao.php');
 
           </select>
 </label>
-        </p><br><br></div></div>
+        </p></div>
+        <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
+        <p class="lead fw-normal mb-2 me-3">
+            <label>Valor Aula: R$: </label>
+            <input type="text" name="valor_aula" size="5">
+        </p>
+
+      </div>
+
+        </div>
         <div class="container m-auto">
         <p class="text-center m-auto">Agendamento:</p>
         </div>

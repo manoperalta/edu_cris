@@ -32,13 +32,14 @@ FROM usuarios
 WHERE nome LIKE '%$pesquisa%' 
 OR email LIKE '%$pesquisa%' 
 OR agenda LIKE '%$pesquisa%' 
-OR financeiro LIKE '%$pesquisa%'";
+OR financeiro_aberto LIKE '%$pesquisa%' 
+OR financeiro_pago LIKE '%$pesquisa%'";
 
 $sql_query = $mysqli->query($sql_code) or die("Error ao consultar" . $mysqli->error);
 ?>
 
 <form action="">
-  <label>Você pode buscar pelo Nome ou pela Agenda!</label><br>
+  <label>Você pode buscar pelo Nome ou pela situação!</label><br>
     <input name="busca" placeholder="Digite o Dado" type="text">
     <button class="btn btn-primary" type="submit" role="button">Pesquisar</button>
     <a class="btn btn-primary" href="editar.php" role="button">Editar</a><br>
@@ -50,7 +51,9 @@ $sql_query = $mysqli->query($sql_code) or die("Error ao consultar" . $mysqli->er
       <th scope="col">#</th>
       <th scope="col">Nome</th>
       <th scope="col">Agenda</th>
-      <th scope="col">Financeiro</th>
+      <th scope="col">Financeiro Aberto</th>
+      <th scope="col">Dívida Ativa</th>
+      <th scope="col">Data de Pagamento</th>
       <th scope="col">Ações</th>
     </tr>
   </thead>
@@ -69,7 +72,8 @@ $sql_query = $mysqli->query($sql_code) or die("Error ao consultar" . $mysqli->er
 $sql_code = "SELECT * 
 FROM usuarios 
 WHERE nome LIKE '%$pesquisa%' 
-OR financeiro LIKE '%$pesquisa%' 
+OR financeiro_aberto LIKE '%$pesquisa%' 
+OR financeiro_pago LIKE '%$pesquisa%' 
 OR agenda LIKE '%$pesquisa%'";
 
 $sql_query = $mysqli->query($sql_code) or die("Error ao consultar" . $mysqli->error);
@@ -89,7 +93,13 @@ while($dados = $sql_query->fetch_assoc()){
     <td><?php echo $dados['id']; ?></td>
     <td><?php echo $nome_link; ?></td>
     <td><?php echo $dados['agenda']; ?></td>
-    <td><?php echo $dados['financeiro']; ?></td>
+<td><label>R$: <?php echo $dados['divida_ativa']; ?></label></td>
+    </div>
+  
+  
+  </td>
+    <td><?php echo $dados['financeiro_aberto']; ?></td>
+    <td><?php echo $dados['financeiro_pago'] . "R$: " . $dados['divida_paga'] . ",00"; ?></td>
     <td>
     <div class="container">
   <div class="row">
@@ -105,7 +115,19 @@ while($dados = $sql_query->fetch_assoc()){
 <input name="busca" placeholder="" type="hidden" value="<?php echo $dados['nome']; ?>">
         <button class="btn btn-primary" type="submit" role="button">E</button>
 
-</form></div></div></div>
+</form></div>
+<div class="col-6 col-sm-4">
+<form action="pagar.php" method="POST">
+<input name="id" placeholder="" type="hidden" value="<?php echo $dados['id']; ?>">
+<input name="nome" placeholder="" type="hidden" value="<?php echo $dados['nome']; ?>">
+<input name="financeiro_pago" placeholder="" type="hidden" value="<?php echo $dados['financeiro_pago']; ?>">
+<input name="divida_paga" placeholder="" type="hidden" value="<?php echo $dados['divida_paga']; ?>">
+<input name="divida_ativa" placeholder="" type="hidden" value="<?php echo $dados['divida_ativa']; ?>">
+<label>R$: <input name="pagar" placeholder="" type="text" size="3" value="<?php echo $dados['divida_ativa']; ?>">
+<button type="submit" role="button" class="btn btn-primary btn-sm">Pagar</button>
+    </form></div>
+
+</div></div>
 
 
     </td>

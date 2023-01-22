@@ -22,7 +22,14 @@ $esp = "<br>";
 $agenda = $agenda1x . $horario1x . $esp . $agenda2x . $horario2x . $esp . $agenda3x . $horario3x . $esp . $agenda4x . $horario4x;
 $matricula = $dia_completo;
 $registro_inicial = "[Data da Matrícula: ". $matricula . "]";
-$financeiro = "";
+$financeiro = "Abertura: <br>";
+$financeiro_pago = "Pagamento: <br>";
+$valor_aula = filter_input(INPUT_POST, 'valor_aula', FILTER_SANITIZE_STRING);
+$divida_ativa = "0";
+$divida_paga = "0";
+
+
+
 echo "Nome: $nome <br>";
 echo "Fone: $fone <br>";
 echo "Responsavel: $responsavel <br>";
@@ -32,10 +39,11 @@ echo "Data_Nasc: $data_nasc <br>";
 echo "Tipo: $tipo<br>";
 echo "Senha: $senha<br>";
 echo "Agenda: $agenda<br>";
-echo "Matricula $registro_inicial";
+echo "Matricula $registro_inicial<br>";
+echo "Valor da Aula: $valor_aula <br>";
 
 
-$result_bd = "INSERT INTO usuarios (nome, fone, responsavel, endereco, email, data_nasc, tipo, agenda, senha, aulas, matricula, financeiro)  VALUES('$nome', '$fone', '$responsavel', '$endereco', '$email', '$data_nasc', '$tipo', '$agenda', '$senha', '$registro_inicial', '$matricula', '$financeiro')";
+$result_bd = "INSERT INTO usuarios (nome, fone, responsavel, endereco, email, data_nasc, tipo, agenda, senha, aulas, matricula, financeiro_aberto, financeiro_pago, valor_aula, divida_ativa, divida_paga)  VALUES('$nome', '$fone', '$responsavel', '$endereco', '$email', '$data_nasc', '$tipo', '$agenda', '$senha', '$registro_inicial', '$matricula', '$financeiro', '$financeiro_pago', '$valor_aula', '$divida_ativa', '$divida_paga')";
 $resultado_usuario = mysqli_query($mysqli, $result_bd);
 
 if(mysqli_insert_id($mysqli)) {
