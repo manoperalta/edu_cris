@@ -1,5 +1,6 @@
 <?php
 include("conexao.php");
+include("protect.php");
 
 
 
@@ -30,11 +31,11 @@ $financeiro_pago = filter_input(INPUT_POST, 'financeiro_pago', FILTER_SANITIZE_S
 $divida_paga = filter_input(INPUT_POST, 'divida_paga', FILTER_SANITIZE_STRING);
 
 
-$financeiro_pago = $financeiro_pago . $dia_plus;
+
 $divida_paga1 = $divida_ativa - $pagar;
 $divida_registro = $divida_paga + $pagar;
 $financeiro_aberto = "Pagou: R$:" . $pagar . $dia_plus;
-
+$financeiro_pago = $financeiro_pago . $dia_plus . $divida_registro;
 
     
 $result_bd = "UPDATE usuarios SET financeiro_pago = '$financeiro_pago' WHERE usuarios . id = '$id_post'";
