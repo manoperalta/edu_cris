@@ -27,6 +27,7 @@ $financeiro_pago = "Pagamento: <br>";
 $valor_aula = filter_input(INPUT_POST, 'valor_aula', FILTER_SANITIZE_STRING);
 $divida_ativa = "0";
 $divida_paga = "0";
+$reg_aula = "0";
 
 
 
@@ -43,7 +44,7 @@ echo "Matricula $registro_inicial<br>";
 echo "Valor da Aula: $valor_aula <br>";
 
 
-$result_bd = "INSERT INTO usuarios (nome, fone, responsavel, endereco, email, data_nasc, tipo, agenda, senha, aulas, matricula, financeiro_aberto, financeiro_pago, valor_aula, divida_ativa, divida_paga)  VALUES('$nome', '$fone', '$responsavel', '$endereco', '$email', '$data_nasc', '$tipo', '$agenda', '$senha', '$registro_inicial', '$matricula', '$financeiro', '$financeiro_pago', '$valor_aula', '$divida_ativa', '$divida_paga')";
+$result_bd = "INSERT INTO usuarios (nome, fone, responsavel, endereco, email, data_nasc, tipo, agenda, senha, aulas, matricula, financeiro_aberto, financeiro_pago, valor_aula, divida_ativa, divida_paga, reg_aula)  VALUES('$nome', '$fone', '$responsavel', '$endereco', '$email', '$data_nasc', '$tipo', '$agenda', '$senha', '$registro_inicial', '$matricula', '$financeiro', '$financeiro_pago', '$valor_aula', '$divida_ativa', '$divida_paga', '$reg_aula')";
 $resultado_usuario = mysqli_query($mysqli, $result_bd);
 
 if(mysqli_insert_id($mysqli)) {

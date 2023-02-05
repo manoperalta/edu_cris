@@ -32,7 +32,7 @@ if(isset($_POST['email']) || isset($_POST['senha'])) {
             header("location: painel.php");
 
         } else {
-            echo "Falha ao Logar! E-amil ou senha incorretos";
+            echo "Falha ao Logar! E-mail ou senha incorretos";
         }
     }
 }
@@ -41,7 +41,8 @@ if(isset($_POST['email']) || isset($_POST['senha'])) {
 <html lang="pt-br">
 
 <head>
-  <title>PV ::: Cadastros</title>
+  <title>Edu Cris Sistema</title>
+  <link rel="icon" type="image/x-icon" href="img/logo.png">
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -54,48 +55,56 @@ if(isset($_POST['email']) || isset($_POST['senha'])) {
 
 <body>
   <header>
-  <div class="collapse" id="navbarToggleExternalContent">
-  <div class="bg-dark p-4">
-  <div class="dropdown m-auto">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-    Geral
-  </button>
-  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-  <li><a class="dropdown-item" href="painel.php">Painel</a></li>    
-  <li><a class="dropdown-item" href="#">Professores</a></li>
-    <li><a class="dropdown-item" href="#">Financeiro</a></li>
-    <li><a class="dropdown-item" href="logout.php">SAIR</a></li>
-  </ul>
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-    Alunos
-  </button>
-  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-  <li><a class="dropdown-item" href="cadastrar.php">Cadastrar</a></li>  
-  <li><a class="dropdown-item" href="agenda.php">Agendar</a></li>
-    <li><a class="dropdown-item" href="editar.php">Editar</a></li>
-    <li><a class="dropdown-item" href="busca.php">Buscar</a></li>
-  </ul>
-</div>
-  </div>
-</div>
-<nav class="navbar navbar-dark bg-dark">
-  <div class="container-fluid">
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <h7 class="text-center m-auto" style="color: aquamarine;">Sistema de Cadastro</h7>
-</h7>
-  </div>
-</nav>
+ <?php include('nav.php'); ?>
+   
+  
+<style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+
+  </head>
+  <body class="text-center">
+  <main class="form-signin">
+  <div class="container" style="padding: 45px;">
+    <div class="row">
+    <div class="col">
+     
+    </div>
+    <div class="col">
     <form action="" method="post">
-<label>E-mail:</label>
-<input type="text" name="email">
-</p><p>
-    <label>Senha</label>
-    <input type="password" name="senha">
-</p><p>
-    <button type="submit">Entrar</button>
-    </p>
-</form>
+    <img class="mb-4" src="img/logo.png" alt="Espaco da Prof Cris" width="257" height="87">
+    <h1 class="h3 mb-3 fw-normal">Área de Acesso:</h1>
+
+    <div class="form-floating">
+      <input type="email" name="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+      <label for="floatingInput">Email address</label>
+    </div>
+    <div class="form-floating">
+      <input type="password" name="senha" class="form-control" id="floatingPassword" placeholder="Password">
+      <label for="floatingPassword">Password</label>
+    </div><p></p>
+
+    
+    <button class="w-100 btn btn-lg btn-primary" type="submit">Entrar</button>
+    <p class="mt-5 mb-3 text-muted">&copy; 2023</p>
+  </form>
+
+    </div>
+    <div class="col">
+      
+    </div>
+    </main>
 </body>
 </html>

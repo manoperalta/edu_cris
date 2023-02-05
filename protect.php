@@ -25,7 +25,7 @@ if(!isset($_SESSION)){
 }
 
 if(!isset($_SESSION['id'])){
-    die("Você não pode acessar esta página porque não esta logado. <p><a href=\"index.php\">ENTRAR</a></p>");
-    
+    die(include('index.php'));
+    #"Você não pode acessar esta página porque não esta logado. <p><a href=\"index.php\">ENTRAR</a></p>"
 }
 ?>

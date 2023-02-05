@@ -8,6 +8,7 @@ include('conexao.php');
 <head>
   <title>Painel de Acesso</title>
   <!-- Required meta tags -->
+  <link rel="icon" type="image/x-icon" href="img/logo.png">
  <?php include('meta.php'); ?>
  
 </head>

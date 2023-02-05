@@ -82,13 +82,17 @@ echo "Registro atual: $aula_reg <br>";
 $result_bd = "UPDATE usuarios SET aulas = '$aula_reg' WHERE usuarios . id = '$id_post'";
 $resultado_usuario = mysqli_query($mysqli, $result_bd);
 
+$result_bd = "UPDATE usuarios SET reg_aula = '$reg_aula' WHERE usuarios . id = '$id_post'";
+$resultado_usuario = mysqli_query($mysqli, $result_bd);
 
-
+#link https //api.whatsapp.com/send phone=seunumerodetelefone&text=sua 20mensagem
 
 if(mysqli_insert_id($mysqli)) {
+
    header("Location: index.php");
 
 }else{
+   
     header("Location: aula.php?busca=$nome");
    
 }
